@@ -24,5 +24,8 @@ Route::prefix('auth')->group(function () {
     Route::group(['middleware' => 'auth:api'], function(){
         Route::get('user', 'AuthController@user');
         Route::post('logout', 'AuthController@logout');
+        Route::post('users/create', 'UserController@create')->middleware('isAdmin');
+        Route::get('users', 'UserController@index')->middleware('isAdmin');
+        Route::get('users/{id}', 'UserController@show')->middleware('isAdminOrSelf');
     });
 });
