@@ -9,6 +9,7 @@
     </div>
 </template>
 <script>
+  import userList from '../../components/user-list.vue'
   export default {
     mounted() {
       //
