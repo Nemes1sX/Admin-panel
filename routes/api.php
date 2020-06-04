@@ -25,7 +25,14 @@ Route::prefix('auth')->group(function () {
         Route::get('user', 'AuthController@user');
         Route::post('logout', 'AuthController@logout');
         Route::post('users/create', 'UserController@create')->middleware('isAdmin');
-        Route::get('users', 'UserController@index')->middleware('isAdmin');
+        Route::get('users', 'UserController@index')->middleware('isAdminOrSelf');
         Route::get('users/{id}', 'UserController@show')->middleware('isAdminOrSelf');
-    });
+    });   
 });
+Route::prefix('tasks')->group(function(){
+    Route::post('add', 'TaskController@add');
+    Route::get('show/{id}', 'TaskController@show');
+    Route::get('edit/{id}', 'TaskController@edit');
+    Route::post('update/{id}', 'TaskController@update');
+    Route::delete('delete/{id}', 'TaskController@delete');
+}); 

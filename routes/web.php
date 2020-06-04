@@ -15,11 +15,11 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/', function (){
+Route::get('{any}', function () {
     return view('welcome');
-})->where('any', '^(?!api\/)[\/\w\.-]*');
+})->where('any', '.*');
 
-Auth::routes();
+//Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');
 

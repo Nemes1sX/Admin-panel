@@ -2,6 +2,8 @@ import 'es6-promise/auto'
 import axios from 'axios'
 import './bootstrap'
 import Vue from 'vue'
+import Datetime  from 'vue-datetime'
+import 'vue-datetime/dist/vue-datetime.css'
 import VueAuth from '@websanova/vue-auth'
 import VueAxios from 'vue-axios'
 import VueRouter from 'vue-router'
@@ -24,6 +26,8 @@ Vue.use(VueAuth, auth)
 
 // Load Index
 Vue.component('index', Index)
+Vue.component('datetime', Datetime);
+
 
 const app = new Vue({
     el: '#app',

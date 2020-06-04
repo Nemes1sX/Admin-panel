@@ -3,6 +3,9 @@ import VueRouter from 'vue-router'
 import Home from './pages/Home'
 import Register from './pages/Register'
 import Login from './pages/Login'
+import Task from './pages/task/Tasks'
+import TaskAdd from './pages/task/TaskAdd'
+import TaskEdit from './pages/task/TaskEdit'
 import Dashboard from './pages/user/Dashboard'
 import AdminDashboard from './pages/admin/Dashboard'
 // Routes
@@ -40,6 +43,22 @@ const routes = [
       auth: true
     }
   },
+  {
+    path: '/tasks',
+    name: 'task',
+    component: Task,
+    meta: {
+      auth: true
+    }
+  },
+  {
+    path: '/task/edit',
+    name: 'task.edit',
+    component: TaskEdit,
+    meta: {
+      auth: true
+    }
+  },
   // ADMIN ROUTES
   {
     path: '/admin',
@@ -47,6 +66,14 @@ const routes = [
     component: AdminDashboard,
     meta: {
       auth: {roles: 2, redirect: {name: 'login'}, forbiddenRedirect: '/403'}
+    }
+  },
+  {
+    path: '/task/add',
+    name: 'task.add',
+    component: TaskAdd,
+    meta: {
+      auth: {roles: 2, redirect: {name: 'login'}, forbiddenRedirect: '/403'} 
     }
   },
 ]

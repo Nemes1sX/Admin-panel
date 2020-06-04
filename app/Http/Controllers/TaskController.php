@@ -18,7 +18,12 @@ class TaskController extends Controller
      */
     public function index()
     {
-        //
+        $tasks = Task::with('user')->get();//
+        return response()->json(
+            [
+                'status' => 'success',
+                'tasks' => $tasks->toArray()
+            ], 200);
     }
 
     /**
@@ -34,8 +39,10 @@ class TaskController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $id)
+    public function add(Request $request)
     {
+        $users = User::all();
+
         $v = Validator::make($request->all(),[
             'name' => 'required',
             'description' => 'required|min:20',
@@ -54,8 +61,10 @@ class TaskController extends Controller
        $task->description = $request->description;
        $task->date = $request->date;
        $task->status = $request->status;
-       $task->user_id = User::id();
+       $task->user_id = $request->user_id;
        $task->save();
+       return response()->json(['status' => 'success'], 200);
+
     }
 
     /**
@@ -66,7 +75,12 @@ class TaskController extends Controller
      */
     public function show($id)
     {
-        //
+        $tasks = Task::find($id)->users;//
+        return response()->json(
+            [
+                'status' => 'success',
+                'tasks' => $tasks->toArray()
+            ], 200);//
     }
 
     /**
@@ -77,7 +91,13 @@ class TaskController extends Controller
      */
     public function edit($id)
     {
-        //
+        $tasks = Task::find($id)->users;//
+        return response()->json(
+            [
+                'status' => 'success',
+                'task' => $tasks->toArray()
+            ], 200);//
+
     }
 
     /**
@@ -89,7 +109,11 @@ class TaskController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $task =  Task::find($id)->users;
+      $task->update($request->all());
+    
+      return response()->json(['status' => 'Update success'], 200);
+
     }
 
     /**
