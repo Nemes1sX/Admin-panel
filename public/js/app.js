@@ -3341,6 +3341,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3360,6 +3365,7 @@ __webpack_require__.r(__webpack_exports__);
       this.$auth.register({
         data: {
           email: app.email,
+          name: app.name,
           password: app.password,
           password_confirmation: app.password_confirmation
         },
@@ -3452,6 +3458,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3463,7 +3470,7 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     this.axios.get('http://127.0.0.1:8000/api/auth/users').then(function (response) {
-      _this.users = users.data;
+      _this.users = response.data;
     });
   },
   methods: {
@@ -50238,7 +50245,9 @@ var render = function() {
       "header",
       { attrs: { id: "header" } },
       [
-        _c("h1", [_vm._v("\n            Laravel Vue SPA\n        ")]),
+        _c("h1", { staticStyle: { "text-align": "center" } }, [
+          _vm._v("\n            Laravel Vue SPA\n        ")
+        ]),
         _vm._v(" "),
         _c("navigationMenu")
       ],
@@ -50512,16 +50521,12 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
     _c("div", { staticClass: "card card-default" }, [
-      _c("div", { staticClass: "card-header" }, [_vm._v("Connexion")]),
+      _c("div", { staticClass: "card-header" }, [_vm._v("Login")]),
       _vm._v(" "),
       _c("div", { staticClass: "card-body" }, [
         _vm.has_error
           ? _c("div", { staticClass: "alert alert-danger" }, [
-              _c("p", [
-                _vm._v(
-                  "Erreur, impossible de se connecter avec ces identifiants."
-                )
-              ])
+              _c("p", [_vm._v("Please provide correct credentials.")])
             ])
           : _vm._e(),
         _vm._v(" "),
@@ -50569,9 +50574,7 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "form-group" }, [
-              _c("label", { attrs: { for: "password" } }, [
-                _vm._v("Mot de passe")
-              ]),
+              _c("label", { attrs: { for: "password" } }, [_vm._v("Password")]),
               _vm._v(" "),
               _c("input", {
                 directives: [
@@ -50598,8 +50601,8 @@ var render = function() {
             _vm._v(" "),
             _c(
               "button",
-              { staticClass: "btn btn-default", attrs: { type: "submit" } },
-              [_vm._v("Connexion")]
+              { staticClass: "btn btn-success", attrs: { type: "submit" } },
+              [_vm._v("Login")]
             )
           ]
         )
@@ -50631,20 +50634,18 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
     _c("div", { staticClass: "card card-default" }, [
-      _c("div", { staticClass: "card-header" }, [_vm._v("Inscription")]),
+      _c("div", { staticClass: "card-header" }, [_vm._v("Register")]),
       _vm._v(" "),
       _c("div", { staticClass: "card-body" }, [
         _vm.has_error && !_vm.success
           ? _c("div", { staticClass: "alert alert-danger" }, [
               _vm.error == "registration_validation_error"
                 ? _c("p", [
-                    _vm._v(
-                      "Erreur(s) de validation, veuillez consulter le(s) message(s) ci-dessous."
-                    )
+                    _vm._v("Validation errors, please provide vaild data!")
                   ])
                 : _c("p", [
                     _vm._v(
-                      "Erreur, impossible de s'inscrire pour le moment. Si le problème persiste, veuillez contacter un administrateur."
+                      "Error, if problem presists please contact to system administrator"
                     )
                   ])
             ])
@@ -50712,11 +50713,54 @@ var render = function() {
                   "div",
                   {
                     staticClass: "form-group",
+                    class: { "has-error": _vm.has_error && _vm.errors.name }
+                  },
+                  [
+                    _c("label", { attrs: { for: "name" } }, [_vm._v("Name")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.name,
+                          expression: "name"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "name",
+                        id: "name",
+                        placeholder: "Name Name"
+                      },
+                      domProps: { value: _vm.name },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.name = $event.target.value
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.has_error && _vm.errors.name
+                      ? _c("span", { staticClass: "help-block" }, [
+                          _vm._v(_vm._s(_vm.errors.name))
+                        ])
+                      : _vm._e()
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "form-group",
                     class: { "has-error": _vm.has_error && _vm.errors.password }
                   },
                   [
                     _c("label", { attrs: { for: "password" } }, [
-                      _vm._v("Mot de passe")
+                      _vm._v("Password")
                     ]),
                     _vm._v(" "),
                     _c("input", {
@@ -50757,7 +50801,7 @@ var render = function() {
                   },
                   [
                     _c("label", { attrs: { for: "password_confirmation" } }, [
-                      _vm._v("Confirmation mot de passe")
+                      _vm._v("Confirmation password")
                     ]),
                     _vm._v(" "),
                     _c("input", {
@@ -50786,8 +50830,8 @@ var render = function() {
                 _vm._v(" "),
                 _c(
                   "button",
-                  { staticClass: "btn btn-default", attrs: { type: "submit" } },
-                  [_vm._v("Inscription")]
+                  { staticClass: "btn btn-success", attrs: { type: "submit" } },
+                  [_vm._v("Register")]
                 )
               ]
             )
@@ -50926,26 +50970,35 @@ var render = function() {
               })
             ]),
             _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "form-group" },
-              [
-                _c("label", [_vm._v("Task date")]),
-                _vm._v(" "),
-                _c("datetime", {
-                  model: {
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", [_vm._v("Task date")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
                     value: _vm.task.date,
-                    callback: function($$v) {
-                      _vm.$set(_vm.task, "date", $$v)
-                    },
                     expression: "task.date"
                   }
-                })
-              ],
-              1
-            ),
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text" },
+                domProps: { value: _vm.task.date },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.task, "date", $event.target.value)
+                  }
+                }
+              })
+            ]),
             _vm._v(" "),
             _c("div", { staticClass: "form-group" }, [
+              _c("label", [_vm._v("Assigned user")]),
+              _vm._v(" "),
               _c(
                 "select",
                 {
@@ -50953,8 +51006,8 @@ var render = function() {
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.task.user.id,
-                      expression: "task.user.id"
+                      value: _vm.task.user_id,
+                      expression: "task.user_id"
                     }
                   ],
                   staticClass: "form-control",
@@ -50969,8 +51022,8 @@ var render = function() {
                           return val
                         })
                       _vm.$set(
-                        _vm.task.user,
-                        "id",
+                        _vm.task,
+                        "user_id",
                         $event.target.multiple
                           ? $$selectedVal
                           : $$selectedVal[0]
@@ -50979,11 +51032,9 @@ var render = function() {
                   }
                 },
                 _vm._l(_vm.users, function(user) {
-                  return _c(
-                    "option",
-                    { key: _vm.user_id, attrs: { value: "{user.id}" } },
-                    [_vm._v(_vm._s(user.name))]
-                  )
+                  return _c("option", { domProps: { value: user.id } }, [
+                    _vm._v(_vm._s(user.name))
+                  ])
                 }),
                 0
               )
@@ -50992,7 +51043,7 @@ var render = function() {
             _c(
               "button",
               { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-              [_vm._v("Add Book")]
+              [_vm._v("Add Task")]
             )
           ]
         )
@@ -51249,10 +51300,10 @@ var render = function() {
       _c(
         "tbody",
         _vm._l(_vm.tasks, function(task) {
-          return _c("tr", { key: task.id }, [
+          return _c("tr", { key: task.id, attrs: { task: task } }, [
             _c("td", [_vm._v(_vm._s(task.name))]),
             _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(task.descrition))]),
+            _c("td", [_vm._v(_vm._s(task.description))]),
             _vm._v(" "),
             _c("td", [_vm._v(_vm._s(task.taskdate))]),
             _vm._v(" "),
@@ -67092,8 +67143,8 @@ vue__WEBPACK_IMPORTED_MODULE_3___default.a.use(vue_axios__WEBPACK_IMPORTED_MODUL
 axios__WEBPACK_IMPORTED_MODULE_1___default.a.defaults.baseURL = "".concat("http://127.0.0.1:8000", "/api");
 vue__WEBPACK_IMPORTED_MODULE_3___default.a.use(_websanova_vue_auth__WEBPACK_IMPORTED_MODULE_6__["default"], _auth__WEBPACK_IMPORTED_MODULE_10__["default"]); // Load Index
 
-vue__WEBPACK_IMPORTED_MODULE_3___default.a.component('index', _Index__WEBPACK_IMPORTED_MODULE_9__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_3___default.a.component('datetime', vue_datetime__WEBPACK_IMPORTED_MODULE_4___default.a);
+vue__WEBPACK_IMPORTED_MODULE_3___default.a.component('index', _Index__WEBPACK_IMPORTED_MODULE_9__["default"]); //Vue.component('datetime', Datetime)
+
 var app = new vue__WEBPACK_IMPORTED_MODULE_3___default.a({
   el: '#app',
   router: _router__WEBPACK_IMPORTED_MODULE_11__["default"]
@@ -67971,13 +68022,8 @@ var routes = [{
   name: 'task.add',
   component: _pages_task_TaskAdd__WEBPACK_IMPORTED_MODULE_5__["default"],
   meta: {
-    auth: {
-      roles: 2,
-      redirect: {
-        name: 'login'
-      },
-      forbiddenRedirect: '/403'
-    }
+    auth: undefined //{roles: 2, redirect: {name: 'login'}, forbiddenRedirect: '/403'} 
+
   }
 }];
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({

@@ -73,7 +73,8 @@ const routes = [
     name: 'task.add',
     component: TaskAdd,
     meta: {
-      auth: {roles: 2, redirect: {name: 'login'}, forbiddenRedirect: '/403'} 
+      auth: undefined
+      //{roles: 2, redirect: {name: 'login'}, forbiddenRedirect: '/403'} 
     }
   },
 ]

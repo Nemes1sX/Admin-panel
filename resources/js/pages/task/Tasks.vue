@@ -14,9 +14,9 @@
             </tr>
             </thead>
             <tbody>
-            <tr v-for="task in tasks" :key="task.id">
+            <tr v-for="task in tasks" :key="task.id" :task="task">
                 <td>{{ task.name }}</td>
-                <td>{{ task.descrition }}</td>
+                <td>{{ task.description }}</td>
                 <td>{{ task.taskdate }}</td>
                 <td>{{ task.status }}</td>
                 <td>{{ task.user.name }}</td>

@@ -46,8 +46,7 @@ class TaskController extends Controller
         $v = Validator::make($request->all(),[
             'name' => 'required',
             'description' => 'required|min:20',
-            'date' => 'required',
-            'status' => 'required',
+            'taskdate' => 'required',
        ]);//
        if($v->fails())
        {
@@ -59,7 +58,7 @@ class TaskController extends Controller
        $task = new Task;
        $task->name = $request->name;
        $task->description = $request->description;
-       $task->date = $request->date;
+       $task->taskdate = $request->taskdate;
        $task->status = $request->status;
        $task->user_id = $request->user_id;
        $task->save();

@@ -14,14 +14,15 @@
                     </div>
                      <div class="form-group">
                         <label>Task date</label>
-                        <datetime v-model="task.date"></datetime>
+                        <input type="text" class="form-control" v-model="task.date">
                     </div>
                     <div class="form-group">
-                        <select class="form-control" v-model="task.user.id">
-                            <option v-for="user in users" :key="user_id" value="{user.id}">{{ user.name }}</option>
+                        <label>Assigned user</label>
+                        <select class="form-control" v-model="task.user_id">
+                            <option v-for="user in users"  v-bind:value="user.id">{{ user.name }}</option>
                         </select>
                     </div>    
-                    <button type="submit" class="btn btn-primary">Add Book</button>
+                    <button type="submit" class="btn btn-primary">Add Task</button>
                 </form>
             </div>
         </div>
@@ -40,7 +41,7 @@
             this.axios
                 .get('http://127.0.0.1:8000/api/auth/users')
                 .then(response =>{
-                    this.users = users.data;
+                    this.users = response.data;
                 });
 
         },

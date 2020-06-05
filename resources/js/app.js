@@ -26,7 +26,7 @@ Vue.use(VueAuth, auth)
 
 // Load Index
 Vue.component('index', Index)
-Vue.component('datetime', Datetime);
+//Vue.component('datetime', Datetime)
 
 
 const app = new Vue({

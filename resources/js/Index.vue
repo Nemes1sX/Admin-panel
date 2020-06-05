@@ -1,7 +1,7 @@
 <template>
     <div id="main">
         <header id="header">
-            <h1>
+            <h1 style="text-align: center;">
                 Laravel Vue SPA
             </h1>
             <navigationMenu></navigationMenu>
