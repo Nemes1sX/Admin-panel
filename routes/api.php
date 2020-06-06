@@ -31,7 +31,7 @@ Route::prefix('auth')->group(function () {
 });
 Route::prefix('tasks')->group(function(){
     Route::get('/', 'TaskController@index');
-    Route::post('add', 'TaskController@add');
+    Route::post('add-me', 'TaskController@add');
     Route::get('show/{id}', 'TaskController@show');
     Route::get('edit/{id}', 'TaskController@edit');
     Route::post('update/{id}', 'TaskController@update');

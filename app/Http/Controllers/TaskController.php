@@ -41,13 +41,13 @@ class TaskController extends Controller
      */
     public function add(Request $request)
     {
-        $users = User::all();
 
         $v = Validator::make($request->all(),[
             'name' => 'required',
             'description' => 'required|min:20',
-            'taskdate' => 'required',
+            'taskdate' => 'required', // 
        ]);//
+      
        if($v->fails())
        {
         return response()->json([
@@ -55,13 +55,16 @@ class TaskController extends Controller
             'errors' => $v->errors()
         ], 422);
        }
+
+     
        $task = new Task;
        $task->name = $request->name;
        $task->description = $request->description;
        $task->taskdate = $request->taskdate;
        $task->status = $request->status;
        $task->user_id = $request->user_id;
-       $task->save();
+       $task->save(); 
+
        return response()->json(['status' => 'success'], 200);
 
     }

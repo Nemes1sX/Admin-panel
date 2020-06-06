@@ -3,7 +3,14 @@
         <div class="card card-default">
             <div class="card-header">Admin Dashboard</div>
             <div class="card-body">
-                Bienvenue sur votre dashboard administrateur
+                Admin Panel
+            </div>
+        </div>
+          <div class="card card-default">
+            <div class="card-header">User list</div>
+
+            <div class="card-body">
+                <userList></userList>
             </div>
         </div>
     </div>
@@ -13,6 +20,9 @@
   export default {
     mounted() {
       //
+    },
+    components:{
+      userList
     }
   }
 </script>

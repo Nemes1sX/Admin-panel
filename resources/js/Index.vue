@@ -4,7 +4,7 @@
             <h1 style="text-align: center;">
                 Laravel Vue SPA
             </h1>
-            <navigationMenu></navigationMenu>
+            <navMenu></navMenu>
         </header>
         <div id="content">
             <router-view></router-view>
@@ -12,7 +12,7 @@
     </div>
 </template>
 <script>
-  import navigationMenu from './components/Menu.vue'
+  import navMenu from './components/Menu.vue'
   export default {
     data() {
       return {
@@ -20,7 +20,7 @@
       }
     },
     components: {
-        //
+        navMenu//
     }
   }
 </script>

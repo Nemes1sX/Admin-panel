@@ -14,7 +14,7 @@
                     </div>
                      <div class="form-group">
                         <label>Task date</label>
-                        <input type="text" class="form-control" v-model="task.date">
+                        <input type="text" class="form-control" v-model="task.taskdate">
                     </div>
                     <div class="form-group">
                         <label>Assigned user</label>
@@ -33,29 +33,42 @@
     export default {
         data() {
             return {
-                task: {},
+                task: { status: "new"},
                 users: {}
             }
         },
-        created(){
-            this.axios
-                .get('http://127.0.0.1:8000/api/auth/users')
-                .then(response =>{
-                    this.users = response.data;
-                });
-
+        mounted(){
+           
+            this.getUsers()
         },
         methods: {
             addTask() {
-
+                console.log(this.task)
                 this.axios
-                    .post('http://127.0.0.0.1:8000/api/task/add', this.book)
-                    .then(response => (
-                        this.$router.push({name: 'home'})
-                        // console.log(response.data)
-                    ))
+                    .post('http://localhost:8000/api/tasks/add-me', this.task) // o parodyk api?
+                    .then(response => { //itariu klaida padares esu, kaip ir itariau, bet vistiek tas pats
+                         this.$router.push({name: 'home'})
+                        console.log(response.data)
+                    })
                     .catch(error => console.log(error))
                     .finally(() => this.loading = false)
+            },
+            getUsers(){
+                 this.axios
+                .get('http://127.0.0.1:8000/api/auth/users')
+                .then(response =>{
+                    console.log(response.data);
+                    this.users = response.data.users;
+                });
+               /*  this.$http({
+          url: `users`,
+          method: 'GET'
+        })
+            .then((res) => {
+              this.users = res.data.users
+            }, () => {
+              this.has_error = true
+            })*/
             }
         }
     }
