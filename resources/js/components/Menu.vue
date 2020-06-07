@@ -19,6 +19,9 @@
                     {{route.name}}
                 </router-link>
             </li>
+            <li>
+              <router-link :to="{ name: 'task'}" class="btn btn-info">Tasks</router-link>
+            </li>
             <!--LOGOUT-->
             <li v-if="$auth.check()">
                 <a href="#" @click.prevent="$auth.logout()">Logout</a>

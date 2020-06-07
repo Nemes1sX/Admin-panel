@@ -1,7 +1,7 @@
 <template>
     <div>
-        <h3 class="text-center">All Books</h3><br/>
-
+        <h3 class="text-center">All Tasks</h3><br/>
+        <router-link :to="{name: 'task.add'}" class="btn btn-success">Add Task</router-link>
         <table class="table table-bordered">
             <thead>
             <tr>
@@ -23,9 +23,9 @@
                <td>{{ task.user.name }}</td>
                 <td>
                     <div class="btn-group" role="group">
-                        <router-link :to="{name: 'edit', params: { id: task.id }}" class="btn btn-primary">Edit
+                        <router-link :to="{name: 'task.edit', params: { id: task.id }}" class="btn btn-primary">Edit
                         </router-link>
-                        <button class="btn btn-danger" @click="deleteBook(book.id)">Delete</button>
+                        <button class="btn btn-danger" @click="deleteTask(task.id)">Delete</button>
                     </div>
                 </td>
             </tr>
@@ -49,7 +49,7 @@
                 });
         },
         methods: {
-            deleteBook(id) {
+            deleteTask(id) {
                 this.axios
                     .delete(`http://127.0.0.1:8000/api/task/delete/${id}`)
                     .then(response => {

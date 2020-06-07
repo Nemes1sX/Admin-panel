@@ -3152,6 +3152,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3212,6 +3215,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3233,6 +3244,18 @@ __webpack_require__.r(__webpack_exports__);
         _this.users = res.data.users;
       }, function () {
         _this.has_error = true;
+      });
+    },
+    deleteUser: function deleteUser(id) {
+      var _this2 = this;
+
+      this.axios["delete"]("http://127.0.0.1:8000/api/auth/users/delete/".concat(id)).then(function (response) {
+        var i = _this2.users.map(function (item) {
+          return item.id;
+        }).indexOf(id); // find index of your object
+
+
+        _this2.users.splice(i, 1);
       });
     }
   }
@@ -3637,7 +3660,7 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   methods: {
-    deleteBook: function deleteBook(id) {
+    deleteTask: function deleteTask(id) {
       var _this2 = this;
 
       this.axios["delete"]("http://127.0.0.1:8000/api/task/delete/".concat(id)).then(function (response) {
@@ -50391,6 +50414,18 @@ var render = function() {
             : _vm._e()
         }),
         _vm._v(" "),
+        _c(
+          "li",
+          [
+            _c(
+              "router-link",
+              { staticClass: "btn btn-info", attrs: { to: { name: "task" } } },
+              [_vm._v("Tasks")]
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
         _vm.$auth.check()
           ? _c("li", [
               _c(
@@ -50459,7 +50494,38 @@ var render = function() {
               _vm._v(" "),
               _c("td", [_vm._v(_vm._s(user.name))]),
               _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(user.email))])
+              _c("td", [_vm._v(_vm._s(user.email))]),
+              _vm._v(" "),
+              _c("td", [
+                _c(
+                  "div",
+                  { staticClass: "btn-group", attrs: { role: "group" } },
+                  [
+                    _c(
+                      "router-link",
+                      {
+                        staticClass: "btn btn-primary",
+                        attrs: { to: { name: "edit", params: { id: user.id } } }
+                      },
+                      [_vm._v("Edit\r\n                  ")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-danger",
+                        on: {
+                          click: function($event) {
+                            return _vm.deleteUser(user.id)
+                          }
+                        }
+                      },
+                      [_vm._v("Delete")]
+                    )
+                  ],
+                  1
+                )
+              ])
             ]
           )
         })
@@ -50478,7 +50544,9 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("th", { attrs: { scope: "col" } }, [_vm._v("Name")]),
       _vm._v(" "),
-      _c("th", { attrs: { scope: "col" } }, [_vm._v("Email")])
+      _c("th", { attrs: { scope: "col" } }, [_vm._v("Email")]),
+      _vm._v(" "),
+      _c("th", { attrs: { scope: "col" } }, [_vm._v("Actions")])
     ])
   }
 ]
@@ -50503,34 +50571,53 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "card card-default" }, [
-        _c("div", { staticClass: "card-header" }, [_vm._v("Bienvenue")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card-body" }, [
-          _c("p", [
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "card card-default" }, [
+      _c("div", { staticClass: "card-header" }, [_vm._v("Welcome")]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "card-body" },
+        [
+          _c("h3", [
             _vm._v(
-              "\n                American  Main Barbary Coast scuttle hardtack spanker fire ship grapple jack code  of conduct port. Port red ensign Shiver me timbers provost salmagundi  bring a spring upon her cable pillage cog crow's nest lateen sail.  Barbary Coast quarterdeck lass coffer keel hulk mizzen me square-rigged  loot.\n            "
+              "\n                Hello, this Laravel Vue SPA panel\n            "
             )
           ]),
           _vm._v(" "),
-          _c("p", [
-            _vm._v(
-              "\n                Yardarm starboard keelhaul list schooner prow booty cackle  fruit gabion topmast. Plunder shrouds Nelsons folly jack Arr parley warp  grog blossom ballast pressgang. Knave crack Jennys tea cup flogging log  man-of-war hearties killick long clothes six pounders hulk.\n            "
-            )
-          ])
-        ])
-      ])
+          _c(
+            "div",
+            { staticClass: "btn-group", attrs: { role: "group" } },
+            [
+              _c(
+                "router-link",
+                {
+                  staticClass: "btn btn-primary",
+                  attrs: { to: { name: "login" } }
+                },
+                [_vm._v("Login\n                    ")]
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("p", [_vm._v("Don't have an account")]),
+          _vm._v(" "),
+          _c(
+            "router-link",
+            {
+              staticClass: "btn btn-danger",
+              attrs: { to: { name: "register" } }
+            },
+            [_vm._v("Register\n                    ")]
+          )
+        ],
+        1
+      )
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -51327,63 +51414,75 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("h3", { staticClass: "text-center" }, [_vm._v("All Books")]),
-    _c("br"),
-    _vm._v(" "),
-    _c("table", { staticClass: "table table-bordered" }, [
-      _vm._m(0),
+  return _c(
+    "div",
+    [
+      _c("h3", { staticClass: "text-center" }, [_vm._v("All Tasks")]),
+      _c("br"),
       _vm._v(" "),
       _c(
-        "tbody",
-        _vm._l(_vm.tasks, function(task) {
-          return _c("tr", { key: task.id }, [
-            _c("td", [_vm._v(_vm._s(task.name))]),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(task.description))]),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(task.taskdate))]),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(task.status))]),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(task.user.name))]),
-            _vm._v(" "),
-            _c("td", [
-              _c(
-                "div",
-                { staticClass: "btn-group", attrs: { role: "group" } },
-                [
-                  _c(
-                    "router-link",
-                    {
-                      staticClass: "btn btn-primary",
-                      attrs: { to: { name: "edit", params: { id: task.id } } }
-                    },
-                    [_vm._v("Edit\n                    ")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-danger",
-                      on: {
-                        click: function($event) {
-                          return _vm.deleteBook(_vm.book.id)
+        "router-link",
+        { staticClass: "btn btn-success", attrs: { to: { name: "task.add" } } },
+        [_vm._v("Add Task")]
+      ),
+      _vm._v(" "),
+      _c("table", { staticClass: "table table-bordered" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c(
+          "tbody",
+          _vm._l(_vm.tasks, function(task) {
+            return _c("tr", { key: task.id }, [
+              _c("td", [_vm._v(_vm._s(task.name))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(task.description))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(task.taskdate))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(task.status))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(task.user.name))]),
+              _vm._v(" "),
+              _c("td", [
+                _c(
+                  "div",
+                  { staticClass: "btn-group", attrs: { role: "group" } },
+                  [
+                    _c(
+                      "router-link",
+                      {
+                        staticClass: "btn btn-primary",
+                        attrs: {
+                          to: { name: "task.edit", params: { id: task.id } }
                         }
-                      }
-                    },
-                    [_vm._v("Delete")]
-                  )
-                ],
-                1
-              )
+                      },
+                      [_vm._v("Edit\n                    ")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-danger",
+                        on: {
+                          click: function($event) {
+                            return _vm.deleteTask(task.id)
+                          }
+                        }
+                      },
+                      [_vm._v("Delete")]
+                    )
+                  ],
+                  1
+                )
+              ])
             ])
-          ])
-        }),
-        0
-      )
-    ])
-  ])
+          }),
+          0
+        )
+      ])
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {
@@ -67368,14 +67467,15 @@ __webpack_require__.r(__webpack_exports__);
 /*!***********************************************!*\
   !*** ./resources/js/components/user-list.vue ***!
   \***********************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _user_list_vue_vue_type_template_id_5bf657a5___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./user-list.vue?vue&type=template&id=5bf657a5& */ "./resources/js/components/user-list.vue?vue&type=template&id=5bf657a5&");
 /* harmony import */ var _user_list_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./user-list.vue?vue&type=script&lang=js& */ "./resources/js/components/user-list.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _user_list_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _user_list_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -67405,7 +67505,7 @@ component.options.__file = "resources/js/components/user-list.vue"
 /*!************************************************************************!*\
   !*** ./resources/js/components/user-list.vue?vue&type=script&lang=js& ***!
   \************************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -68063,8 +68163,39 @@ var routes = [{
   name: 'task.add',
   component: _pages_task_TaskAdd__WEBPACK_IMPORTED_MODULE_5__["default"],
   meta: {
-    auth: undefined //{roles: 2, redirect: {name: 'login'}, forbiddenRedirect: '/403'} 
-
+    auth: {
+      roles: 2,
+      redirect: {
+        name: 'login'
+      },
+      forbiddenRedirect: '/403'
+    }
+  }
+}, {
+  path: '/user/create',
+  name: 'user.create',
+  component: _pages_Register__WEBPACK_IMPORTED_MODULE_2__["default"],
+  meta: {
+    auth: {
+      roles: 2,
+      redirect: {
+        name: 'login'
+      },
+      forbiddenRedirect: '/403'
+    }
+  }
+}, {
+  path: '/user/edit',
+  name: 'user.edit',
+  component: _pages_Register__WEBPACK_IMPORTED_MODULE_2__["default"],
+  meta: {
+    auth: {
+      roles: 2,
+      redirect: {
+        name: 'login'
+      },
+      forbiddenRedirect: '/403'
+    }
   }
 }];
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({

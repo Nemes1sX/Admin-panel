@@ -73,10 +73,25 @@ const routes = [
     name: 'task.add',
     component: TaskAdd,
     meta: {
-      auth: undefined
-      //{roles: 2, redirect: {name: 'login'}, forbiddenRedirect: '/403'} 
+      auth: {roles: 2, redirect: {name: 'login'}, forbiddenRedirect: '/403'} 
     }
   },
+  {
+    path: '/user/create',
+    name: 'user.create',
+    component: Register,
+    meta: {
+      auth: {roles: 2, redirect: {name: 'login'}, forbiddenRedirect: '/403'}
+    }
+  },
+  {
+    path: '/user/edit',
+    name: 'user.edit',
+    component: Register,
+    meta: {
+      auth: {roles: 2, redirect: {name: 'login'}, forbiddenRedirect: '/403'}
+    }
+  }
 ]
 const router = new VueRouter({
   history: true,

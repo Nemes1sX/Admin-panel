@@ -24,16 +24,21 @@ Route::prefix('auth')->group(function () {
     Route::group(['middleware' => 'auth:api'], function(){
         Route::get('user', 'AuthController@user');
         Route::post('logout', 'AuthController@logout');
+        Route::get('users/edit/{id}', 'UserController@edit')->middleware('isAdmin');
+        Route::post('users/update/{id}','UserController@update')->middleware('isAdmin');
+        Route::delete('users/delete/{id}', 'UserController@delete')->middleware('isAdmin');
         Route::post('users/create', 'UserController@create')->middleware('isAdmin');
         Route::get('users', 'UserController@index')->middleware('isAdminOrSelf');
         Route::get('users/{id}', 'UserController@show')->middleware('isAdminOrSelf');
     });   
 });
 Route::prefix('tasks')->group(function(){
-    Route::get('/', 'TaskController@index');
-    Route::post('add-me', 'TaskController@add');
-    Route::get('show/{id}', 'TaskController@show');
-    Route::get('edit/{id}', 'TaskController@edit');
-    Route::post('update/{id}', 'TaskController@update');
-    Route::delete('delete/{id}', 'TaskController@delete');
+    Route::group(['middleware' => 'auth:api'], function(){
+        Route::get('/', 'TaskController@index')->middleware('isAdminOrSelf');
+        Route::post('add', 'TaskController@add')->middleware('isAdmin');
+        Route::get('show/{id}', 'TaskController@show')->middleware('isAdminOrSelf');
+        Route::get('edit/{id}', 'TaskController@edit')->middleware('isAdminOrSelf');
+        Route::post('update/{id}', 'TaskController@update')->middleware('isAdminOrSelf');
+        Route::delete('delete/{id}', 'TaskController@delete')->middleware('isAdmin');
+    });
 }); 
