@@ -14,7 +14,7 @@
                     </div>
                      <div class="form-group">
                         <label>Task date</label>
-                        <input type="text" class="form-control" v-model="task.taskdate">
+                        <date-picker v-model="task.taskdate" type="datetime" format="YYYY-MM-DD HH:mm"></date-picker>
                     </div>
                     <div class="form-group">
                         <label>Assigned user</label>
@@ -30,10 +30,14 @@
 </template>
 
 <script>
+   import DatePicker from 'vue2-datepicker';
+    import 'vue2-datepicker/index.css';
     export default {
+      
+       components: { DatePicker },
         data() {
             return {
-                task: { status: "new"},
+                task: { status: "New"},
                 users: {}
             }
         },
@@ -45,7 +49,7 @@
             addTask() {
                 console.log(this.task)
                 this.axios
-                    .post('http://localhost:8000/api/tasks/add-me', this.task) // o parodyk api?
+                    .post('http://localhost:8000/api/tasks/add', this.task) // o parodyk api?
                     .then(response => { //itariu klaida padares esu, kaip ir itariau, bet vistiek tas pats
                          this.$router.push({name: 'home'})
                         console.log(response.data)

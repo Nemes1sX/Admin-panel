@@ -2,14 +2,16 @@ import 'es6-promise/auto'
 import axios from 'axios'
 import './bootstrap'
 import Vue from 'vue'
-import Datetime  from 'vue-datetime'
-import 'vue-datetime/dist/vue-datetime.css'
+import Vuex from 'vuex'
+import DatePicker from 'vue2-datepicker';
+import 'vue2-datepicker/index.css';
 import VueAuth from '@websanova/vue-auth'
 import VueAxios from 'vue-axios'
 import VueRouter from 'vue-router'
 import Index from './Index'
 import auth from './auth'
 import router from './router'
+import storeData from './store/index'
 
 // Set Vue globally
 window.Vue = Vue
@@ -17,7 +19,11 @@ window.Vue = Vue
 // Set Vue router
 Vue.router = router
 Vue.use(VueRouter)
-
+Vue.use(Vuex)
+const store = new Vuex.Store(
+    storeData
+ )
+ 
 
 // Set Vue authentication
 Vue.use(VueAxios, axios)
@@ -31,5 +37,6 @@ Vue.component('index', Index)
 
 const app = new Vue({
     el: '#app',
-    router
+    router,
+    store
 });

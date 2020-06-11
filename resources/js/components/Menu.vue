@@ -20,7 +20,7 @@
                 </router-link>
             </li>
             <li>
-              <router-link :to="{ name: 'task'}" class="btn btn-info">Tasks</router-link>
+              <router-link :to="{ name: 'task'}">Tasks</router-link>
             </li>
             <!--LOGOUT-->
             <li v-if="$auth.check()">
