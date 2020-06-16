@@ -35,28 +35,37 @@
 </template>
 
 <script>
+ import { mapActions } from 'vuex';
     export default {
-        data() {
+        /*data() {
             return {
                 tasks: []
             }
         },
-        created() {
+       created() {
             this.axios
                 .get('http://127.0.0.1:8000/api/tasks')
                 .then(response => {
                     this.tasks = response.data.tasks;
                 });
+        },*/
+        props:{
+           value: {
+                type: Object
+            }
+        },
+        mounted(payload){
+            this.$store.dispatch('allTasks', payload)
+        },
+        computed:{
+            tasks(){
+                return this.$store.getters.getTasks
+            }
         },
         methods: {
-            deleteTask(id) {
-                this.axios
-                    .delete(`http://127.0.0.1:8000/api/task/delete/${id}`)
-                    .then(response => {
-                        let i = this.tasks.map(item => item.id).indexOf(id); // find index of your object
-                        this.tasks.splice(i, 1)
-                    });
-            }
+            ...mapActions({
+                deleteTask: 'deleteTask'
+            })
         }
     }
 </script>

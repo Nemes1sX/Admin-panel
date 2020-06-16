@@ -33,8 +33,9 @@ Route::prefix('auth')->group(function () {
     });   
 });
 Route::prefix('tasks')->group(function(){
+    Route::get('/', 'TaskController@index');//->middleware('isAdminOrSelf');
     Route::group(['middleware' => 'auth:api'], function(){
-        Route::get('/', 'TaskController@index')->middleware('isAdminOrSelf');
+        //Route::get('/', 'TaskController@index')->middleware('isAdminOrSelf');
         Route::post('add', 'TaskController@add')->middleware('isAdmin');
         Route::get('show/{id}', 'TaskController@show')->middleware('isAdminOrSelf');
         Route::get('edit/{id}', 'TaskController@edit')->middleware('isAdminOrSelf');
