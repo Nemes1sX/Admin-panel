@@ -26,7 +26,7 @@ export default {
                 .then((response) => {
                     console.log(response.data.tasks)
                     context.commit('setTasks', response.data.tasks);
-                })
+                }) 
         },
         deleteTask({ commit }, id) { 
           return axios 
