@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Task;
 use App\User;
+use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -23,6 +24,16 @@ class TaskController extends Controller
             [
                 'status' => 'success',
                 'tasks' => $tasks->toArray()
+            ], 200);
+    }
+
+    public function tasksort($sortcolumn, $ascdsc)
+    {
+        $tasks = DB::table('tasks')->orderBy($sortcolumn, $ascdsc)->get()->toArray();
+        return response()->json(
+            [
+                'status' => 'success',
+                'tasks' => $tasks
             ], 200);
     }
 
