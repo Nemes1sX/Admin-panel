@@ -64,15 +64,6 @@
                     console.log(response.data);
                     this.users = response.data.users;
                 });
-               /*  this.$http({
-          url: `users`,
-          method: 'GET'
-        })
-            .then((res) => {
-              this.users = res.data.users
-            }, () => {
-              this.has_error = true
-            })*/
             }
         }
     }
