@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+//User auth api routes
 Route::prefix('auth')->group(function () {
     Route::post('register', 'AuthController@register');
     Route::post('login', 'AuthController@login');
@@ -32,6 +34,8 @@ Route::prefix('auth')->group(function () {
         Route::get('users/{id}', 'UserController@show')->middleware('isAdminOrSelf');
     });   
 });
+
+//Tasks api routes
 Route::prefix('tasks')->group(function(){
     Route::group(['middleware' => 'auth:api'], function(){
         Route::get('sort/{sortcolumn}/{ascdsc}', 'TaskController@tasksort')->middleware('isAdminOrSelf');

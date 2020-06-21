@@ -46,18 +46,18 @@
             this.getUsers()
         },
         methods: {
-            addTask() {
+            addTask() { 
                 console.log(this.task)
                 this.axios
-                    .post('http://localhost:8000/api/tasks/add', this.task) // o parodyk api?
-                    .then(response => { //itariu klaida padares esu, kaip ir itariau, bet vistiek tas pats
+                    .post('http://localhost:8000/api/tasks/add', this.task) 
+                    .then(response => { 
                          this.$router.push({name: 'home'})
                         console.log(response.data)
                     })
                     .catch(error => console.log(error))
                     .finally(() => this.loading = false)
             },
-            getUsers(){
+            getUsers(){ //Fetch users for assigning them
                  this.axios
                 .get('http://127.0.0.1:8000/api/auth/users')
                 .then(response =>{

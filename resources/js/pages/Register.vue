@@ -51,7 +51,7 @@
       register() {
         var app = this
         this.$auth.register({
-          data: {
+          data: { //Client-side valdation
             email: app.email,
             name: app.name,
             password: app.password,

@@ -54,14 +54,14 @@
                
             }
         },
-        created() {
+        created() { //Fetch tasks
             this.axios
                 .get('http://127.0.0.1:8000/api/tasks')
                 .then(response => {
                     this.tasks = response.data.tasks;
                 });
         },
-        methods: {
+        methods: { //Delete tasks
             deleteTask(id) {
                 this.axios
                     .delete(`http://127.0.0.1:8000/api/task/delete/${id}`)
@@ -70,7 +70,7 @@
                         this.tasks.splice(i, 1)
                     });
             },
-            taskSort(sortcolumn, ascdsdc){
+            taskSort(sortcolumn, ascdsdc){ //Sorting
                 this.axios
                     .get(`http://127.0.0.1:8000/api/task/tasksort/${sortcolumn}/${ascdsc}`)
                           .then(response => {
